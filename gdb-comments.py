@@ -9,8 +9,8 @@ except ImportError:
     print('Could not load gdb. Make sure this script is run from within GDB.')
     sys.exit(1)
 
-import command
-from integrations import load_integration
+from gdb_comments import command
+from gdb_comments.integrations import load_integration
 
 command.load()
 load_integration()
