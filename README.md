@@ -10,8 +10,8 @@ Have you ever been in the middle of groking some assembly when all of sudden you
 
 ## Installation
 
-  git clone https://github.com/supersam654/gdb-comments.git ~/.gdb-comments
-  echo "source ~/.gdb-comments/gdb-comments.py" >> ~/.gdbinit
+    git clone https://github.com/supersam654/gdb-comments.git ~/.gdb-comments
+    echo "source ~/.gdb-comments/gdb-comments.py" >> ~/.gdbinit
 
 ## Usage
 
