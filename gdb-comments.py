@@ -10,9 +10,7 @@ except ImportError:
     sys.exit(1)
 
 from gdb_comments import command
-from gdb_comments.integrations import load_integration
 
 command.load()
-load_integration()
 
 print('Loaded Comments!')

@@ -12,8 +12,11 @@ class Command(gdb.Command):
         arg = arg.strip()
         # Comments don't need to be quoted into a single argument.
         parts = arg.split(' ')
+        # Prevent index out of bounds exceptions.
+        parts.append('')
         # Most people are just going to comment the current instruction.
         # Just pass -a <address> <comment> to put a comment on a particular address.
+        clear = False
         if '-c' in parts:
               clear = True
               parts.remove('-c')
@@ -22,7 +25,7 @@ class Command(gdb.Command):
             parts.remove('--clear')
 
         if parts[0] in ('-a', '--at'):
-            address = parts[1]
+            address = int(gdb.parse_and_eval(parts[1]))
             comment = ' '.join(parts[2:])
         else:
             address = utils.get_pc()
@@ -34,7 +37,6 @@ class Command(gdb.Command):
                 utils.error("To overwrite a comment, just add a new comment in the same spot.")
                 return
             comment = ''
-        address = int(gdb.parse_and_eval(address))
         comments = commenter.get_comments(gdb.current_progspace().filename)
         comments.add_comment(address, comment)
 

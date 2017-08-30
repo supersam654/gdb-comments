@@ -28,8 +28,6 @@ def _patch_nearpc():
                 comment = _get_comment(line)
                 comment = C.enhance.comment(comment)
                 line = C.ljust_colored(line, max_line) + comment
-            else:
-                print("Ignoring: %r" % line)
             new_result.append(line)
         return new_result
 
