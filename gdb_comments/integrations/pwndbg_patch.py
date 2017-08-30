@@ -8,7 +8,10 @@ from pwndbg.commands import nearpc
 from gdb_comments import commenter
 
 def _get_comment(line):
-    address = int(re.search('0x[a-f\d]+', line).group(), 16)
+    match = re.search('0x[a-f\d]+', line)
+    if match is None:
+        return ''
+    address = int(match.group(), 16)
     comments = commenter.get_comments(gdb.current_progspace().filename)
     comment = comments.get_comment(address)
     if comment:
