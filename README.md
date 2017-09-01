@@ -6,7 +6,7 @@ Have you ever been in the middle of groking some assembly when all of sudden you
 
 ## Requirements
 
-* GDB with pwndbg (adding support for PEDA and gef soon)
+* GDB with pwndbg or PEDA
 
 ## Installation
 
@@ -33,8 +33,6 @@ Behind the scenes, this creates a file called `/path/to/exe.comments` so there w
 
 ## TODO
 
-* Add support for PEDA
 * Add support for gef
 * Make the comment file a bit less sketchy
 * See if there's a more permanent way to associate comments to lines (addresses seem stable inside of GDB but I'd prefer something like `main+13` a lot more)
-* Make `getpc` only rely on gdb to reduce framework-specific code.
