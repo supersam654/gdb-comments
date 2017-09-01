@@ -20,7 +20,7 @@ def _get_comment(line):
         return ''
 
 def _patch_nearpc():
-    # Monkey patch but leave the original one on the
+    # Monkey patch but leave the original object to allow for unpatching.
     nearpc._original_nearpc = nearpc.nearpc
     def patched_nearpc(*args, **kwargs):
         result = nearpc._original_nearpc(*args, **kwargs)
