@@ -74,12 +74,6 @@ def _load_peda():
     from gdb_comments.integrations import peda_utils
     return peda_utils
 
-# This is lumped into integrations because it used to be integration-specific.
-def _get_pc():
-    pc_line = gdb.execute('info registers pc', to_string=True)
-    pc_addr = pc_line.split('\t')[0].replace(' ', '').replace('pc', '')
-    return int(pc_addr, 16)
-
 def _make_utils():
     _utils = None
     if _utils is None:
@@ -91,9 +85,7 @@ def _make_utils():
 
     if _utils is None:
         raise EnvironmentError('Could not find a supported environment to load comments.')
-    Utils = namedtuple('GdbCommentsUtils', 'info error get_pc')
-    utils = Utils(info=_utils.info, error=_utils.error, get_pc=_get_pc)
-    return utils
+    return _utils.info, _utils.error
 
-
+info, error = _make_utils()
 utils = _make_utils()

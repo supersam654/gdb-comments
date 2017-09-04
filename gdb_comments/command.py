@@ -1,6 +1,5 @@
 import gdb
-from gdb_comments import commenter
-from gdb_comments.integrations import utils
+from gdb_comments import commenter, utils, integrations
 
 class Command(gdb.Command):
     """Defines the `comment` command in GDB."""
@@ -33,8 +32,8 @@ class Command(gdb.Command):
 
         if clear:
             if len(comment) > 0:
-                utils.error("Cannot clear a comment and add a new one at the same time.")
-                utils.error("To overwrite a comment, just add a new comment in the same spot.")
+                integrations.error("Cannot clear a comment and add a new one at the same time.")
+                integrations.error("To overwrite a comment, just add a new comment in the same spot.")
                 return
             comment = ''
         comments = commenter.get_comments(gdb.current_progspace().filename)
@@ -42,6 +41,3 @@ class Command(gdb.Command):
 
 def load():
     Command()
-
-if __name__ == '__main__':
-    load()

@@ -44,6 +44,3 @@ def _unpatch_if_needed(peda):
 def load(peda):
     _unpatch_if_needed(peda)
     _patch_disassemble_around(peda)
-
-if __name__ == '__main__':
-    load()

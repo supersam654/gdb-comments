@@ -43,6 +43,3 @@ def _unpatch_if_needed():
 def load():
     _unpatch_if_needed()
     _patch_nearpc()
-
-if __name__ == '__main__':
-    load()
