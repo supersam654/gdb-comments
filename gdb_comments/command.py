@@ -36,7 +36,13 @@ class Command(gdb.Command):
                 integrations.error("To overwrite a comment, just add a new comment in the same spot.")
                 return
             comment = ''
-        comments = commenter.get_comments(gdb.current_progspace().filename)
+        try:
+            current_file = utils.get_current_filename()
+        except RuntimeError:
+            # Don't print the exception message because I'm far too lazy to make
+            # exception handling Python 2 and 3 compatible at the same time.
+            integrations.error("Cannot add a comment to a non-existant file")
+        comments = commenter.get_comments(current_file)
         comments.add_comment(address, comment)
 
 def load():

@@ -40,3 +40,14 @@ def get_core_dump_mappings():
         start_address, end_address = result.group().split('->')
         ranges.add(range(start_address, end_address))
     return ranges
+
+def get_current_filename():
+    progspace = gdb.current_progspace()
+    if progspace.filename:
+        return progspace.filename
+
+    if len(gdb.execute('info files', to_string=True)) == 0:
+        raise RuntimeError('Please load a file first.')
+
+    # TODO: Get the full path and name of the current core file.
+    return 'core'

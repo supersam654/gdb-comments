@@ -1,18 +1,16 @@
 # This file is responsible for displaying comments in pwndbg.
 import re
-
-import gdb
 from pwndbg import color as C
 from pwndbg.commands import nearpc
 
-from gdb_comments import commenter
+from gdb_comments import commenter, utils
 
 def _get_comment(line):
     match = re.search('0x[a-f\d]+', line)
     if match is None:
         return ''
     address = int(match.group(), 16)
-    comments = commenter.get_comments(gdb.current_progspace().filename)
+    comments = commenter.get_comments(utils.get_current_filename())
     comment = comments.get_comment(address)
     if comment:
         return '; %s' % comment
